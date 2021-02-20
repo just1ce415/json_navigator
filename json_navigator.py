@@ -5,7 +5,7 @@ GitHub: https://github.com/just1ce415/json_navigator.git
 import json
 import jmespath
 
-PATH = 'tests/kved.json'
+PATH = 'tests/friends_list_Obama.json'
 
 def open_json(path:str) -> dict:
     '''
@@ -21,13 +21,22 @@ def request_input(printed_path:str, options:object) -> str:
     Provides the user to pick the key or object in the json file checking its input.
     '''
     usr_input = input(printed_path + ' $ ')
+    # THE RANGE GIVEN
     if isinstance(options, type(range(1))):
-        while not isinstance(usr_input, int) or usr_input not in options:
-            usr_input = input(printed_path + ' $ ')
+        while not isinstance(usr_input, int):
+            # TRYING CHECK IF INPUT MAY BE CONVERTED TO INT
+            try:
+                usr_input = int(usr_input)
+            except ValueError:
+                pass
+            # CHECKING IF INPUT IN RANGE
+            if not isinstance(usr_input, int) or usr_input not in options:
+                usr_input = input(printed_path + ' $ ')
+    # THE LIST GIVEN
     elif isinstance(options, list):
         while usr_input not in options:
             usr_input = input(printed_path + ' $ ')
-    return usr_input    
+    return usr_input
 
 
 def get_options(prime_object:object) -> object:
@@ -63,7 +72,10 @@ def update_paths(json_path:str, printed_path:str, command:object, prime_object_t
         json_path += '['+str(command)+']'
         printed_path += '['+str(command)+']/'
     elif prime_object_type == dict:
-        json_path += '.' + str(command)
+        if json_path == '':
+            json_path += str(command)
+        else:
+            json_path += '.' + str(command)
         printed_path += str(command)+'/'
     else:
         return None
@@ -78,15 +90,18 @@ def start_navigator(json_dict:dict):
     json_path = ''
     # PATH TO DISPLAY FOR USER
     printed_path = PATH + ':/'
-    opened_json = open_json(PATH)
-    next_object = opened_json
+    next_object = json_dict
     # ITERATING WHILE THE OBJECT USER PICKING IS DICT OT LIST
-    while isinstance(next_object, list) or isinstance(next_object, dict):
+    while isinstance(next_object, (list, dict)):
+        # OPTIONS FOR USER
         options = get_options(next_object)
         print(str(options))
+        # GETTING USER'S INPUT
         command = request_input(printed_path, options)
-        json_path, printed_path = update_paths(json_path, printed_path, command, type(opened_json))
-        next_object = jmespath.search(json_path, open_json)
+        # UPDATING PATHS
+        json_path, printed_path = update_paths(json_path, printed_path, command, type(next_object))
+        # RECIVENG NEXT OBJECT
+        next_object = jmespath.search(json_path, json_dict)
     print(next_object)
 
 
