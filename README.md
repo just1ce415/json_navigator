@@ -1,5 +1,6 @@
 # json_navigator
 (Laboratory 3.2)
+
 json_navigator is a module to navigate through json file.
 
 ## Example usage
@@ -15,7 +16,7 @@ PATH = 'path' # STATE YOUR PATH HERE
 ```bash
 $ python json_navigator.py
 ['users', 'next_cursor', 'next_cursor_str', 'previous_cursor', 'previous_cursor_str', 'total_count']
-tests/friends_list_Obama.json:/ $ users    # PICKING THE 'USERS VARIANT'
+tests/friends_list_Obama.json:/ $ users    # PICKING THE 'USERS' VARIANT
 range(0, 10)
 tests/friends_list_Obama.json:/users/ $ 6   # YOU SHOULD STATE THE PROPER RANGE
 ['id', 'id_str', 'name', 'screen_name', 'location', 'description', 'url', 'entities', 'protected', 'followers_count', 'friends_count', 'listed_count', 'created_at', 'favourites_count', 'utc_offset', 'time_zone', 'geo_enabled', 'verified', 'statuses_count', 'lang', 'status', 'contributors_enabled', 'is_translator', 'is_translation_enabled', 'proe', 'default_profile_image', 'following', 'live_following', 'follow_request_sent', 'notifications', 'muting', 'blocking', 'blocked_by', 'translator_type']
