@@ -5,7 +5,7 @@ GitHub: https://github.com/just1ce415/json_navigator.git
 import json
 import jmespath
 
-PATH = 'tests/friends_list_Obama.json'
+PATH = 'tests/frienfs_list_Obama.json'
 
 def open_json(path:str) -> dict:
     '''

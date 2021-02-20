@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Custom
-friends_list_Obama.json
+frienfs_list_Obama.json
 .vscode/
 
 # Distribution / packaging
